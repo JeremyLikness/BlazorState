@@ -1,0 +1,59 @@
+﻿@using BlazorState.ViewModel;
+@using Microsoft.JSInterop;
+@using System.Text.Json;
+@inject IJSRuntime JsRuntime
+@inject IHealthModel Model
+
+@if (hasLoaded)
+{
+    @ChildContent
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    private bool hasLoaded;
+    private bool isDeserializing;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var vm = await JsRuntime.InvokeAsync<string>("stateManager.load", nameof(HealthModel));
+        if (!string.IsNullOrEmpty(vm))
+        {
+            try
+            {
+                var viewModel = JsonSerializer.Deserialize<HealthModel>(vm);
+                if (viewModel != null)
+                {
+                    isDeserializing = true;
+                    Model.AgeYears = viewModel.AgeYears;
+                    Model.HeightInches = viewModel.HeightInches;
+                    Model.IsFemale = viewModel.IsFemale;
+                    Model.IsImperial = viewModel.IsImperial;
+                    Model.WeightPounds = viewModel.WeightPounds;
+                    isDeserializing = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        Model.PropertyChanged += async (o, e) =>
+        {
+            if (isDeserializing)
+            {
+                return;
+            }
+            var vmStr = JsonSerializer.Serialize(((HealthModel)Model));
+            await JsRuntime.InvokeAsync<object>(
+                "stateManager.save", nameof(HealthModel), vmStr);
+        };
+        hasLoaded = true;
+    }
+}

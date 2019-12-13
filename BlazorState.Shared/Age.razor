@@ -1,0 +1,58 @@
+﻿@using BlazorState.ViewModel;
+@inherits HealthModelBase
+
+<div class="unit">
+    <div class="label">Age (@Globals.MinAge - @Globals.MaxAge):</div>
+    <div class="labelTarget">
+        <input type="number"
+               class="@InputClass"
+               @bind-value="@AgeAmt"
+               @bind-value:event="oninput" /> years
+    </div>
+</div>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _age = Model.AgeYears;
+    }
+
+    bool ErrorState = false;
+
+    string InputClass
+    {
+        get
+        {
+            return ErrorState ? "error" : string.Empty;
+        }
+    }
+
+    int _age;
+
+    int AgeAmt
+    {
+        get
+        {
+            return _age;
+        }
+
+        set
+        {
+            if (value != _age)
+            {
+                _age = value;
+                if (value < Globals.MinAge || value > Globals.MaxAge)
+                {
+                    ErrorState = true;
+                }
+                else
+                {
+                    ErrorState = false;
+                    Model.AgeYears = value;
+                }
+            }
+        }
+    }
+}

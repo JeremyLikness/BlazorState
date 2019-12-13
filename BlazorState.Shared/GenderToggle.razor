@@ -1,0 +1,21 @@
+﻿@using BlazorState.ViewModel;
+@inherits HealthModelBase
+
+<div class="unit">
+    <div class="label">
+        <label for="btnGenderToggle">Click to Toggle Gender:</label>
+    </div>
+    <div class="labelTarget">
+        <button id="btnGenderToggle" @onclick="@Model.ToggleGender">@ToggleText</button>
+    </div>
+</div>
+
+@code {
+    string ToggleText
+    {
+        get
+        {
+            return Model.IsMale ? "Male" : "Female";
+        }
+    }
+}

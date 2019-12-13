@@ -1,0 +1,21 @@
+﻿@using BlazorState.ViewModel
+@inherits HealthModelBase
+
+<div class="unit">
+    <div class="label">
+        <label for="btnImperialToggle">Click to Toggle Unit of Measure:</label>
+    </div>
+    <div class="labelTarget">
+        <button id="btnImperialToggle" @onclick="@Model.ToggleImperial">@ToggleText</button>
+    </div>
+</div>
+
+@code {
+    string ToggleText
+    {
+        get
+        {
+            return Model.IsImperial ? "Imperial" : "Metric";
+        }
+    }
+}

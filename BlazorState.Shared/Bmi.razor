@@ -1,0 +1,19 @@
+﻿@using BlazorState.ViewModel;
+@inherits HealthModelBase
+
+<div title="Body Mass Index"
+     class="@BmiClass">
+    <h1>BMI:</h1>
+    <h2>@Model.Bmi</h2>
+    <h2>@Model.BmiTag</h2>
+</div>
+
+@code {
+    string BmiClass
+    {
+        get
+        {
+            return $"{Model.BmiTag} tile";
+        }
+    }
+}

@@ -1,0 +1,115 @@
+﻿@using BlazorState.ViewModel;
+@inherits HealthModelBase
+
+<div class="unit">
+    <div class="label">Height:</div>
+    <div class="labelTarget">
+        @MinHeightText
+        <input type="range"
+               step="1"
+               min="@MinHeight"
+               max="@MaxHeight"
+               @bind-value="@HeightAmt"
+               @bind-value:event="oninput" />
+        @MaxHeightText
+        <br />
+        @HeightDisplay
+    </div>
+</div>
+
+@code {
+
+    private int _height;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Model.PropertyChanged += (o, e) =>
+            {
+                _height = Model.IsImperial ? (int)Model.HeightInches :
+                    (int)(Model.InchesToCentimeters(Model.HeightInches));
+                base.StateHasChanged();
+            };
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _height = (int)(Math.Round(Model.HeightInches));
+    }
+
+    int MinHeight
+    {
+        get
+        {
+            return Model.IsImperial ? Globals.MinHeightInches :
+                Globals.MinHeightCentimeters;
+        }
+    }
+
+    string MinHeightText
+    {
+        get
+        {
+            return RenderHeight(Model.IsImperial ?
+                Globals.MinHeightInches :
+                Globals.MinHeightCentimeters);
+        }
+    }
+
+    int MaxHeight
+    {
+        get
+        {
+            return Model.IsImperial ? Globals.MaxHeightInches :
+                Globals.MaxHeightCentimeters;
+        }
+    }
+
+    string MaxHeightText
+    {
+        get
+        {
+            return RenderHeight(Model.IsImperial ?
+                Globals.MaxHeightInches :
+                Globals.MaxHeightCentimeters);
+        }
+    }
+
+    string HeightDisplay
+    {
+        get
+        {
+            return RenderHeight(_height);
+        }
+    }
+
+    string RenderHeight(int height)
+    {
+        if (Model.IsImperial)
+        {
+            return Model.InchesToFeetDisplay(height);
+        }
+        return $"{height} cm.";
+    }
+
+    int HeightAmt
+    {
+        get
+        {
+            return _height;
+        }
+
+        set
+        {
+            if (value != _height)
+            {
+                _height = value;
+                Model.HeightInches = Model.IsImperial ? value : Model.CentimetersToInches(value);
+            }
+        }
+    }
+}
