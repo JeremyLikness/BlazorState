@@ -22,7 +22,17 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var vm = await JsRuntime.InvokeAsync<string>("stateManager.load", nameof(HealthModel));
+        string vm;
+        try
+        {
+            vm = await JsRuntime.InvokeAsync<string>("stateManager.load", nameof(HealthModel));
+        }
+        // we are pre-rendering. No worries; we'll be called again when the client
+        // is ready
+        catch(InvalidOperationException)
+        {
+            return;
+        }
         if (!string.IsNullOrEmpty(vm))
         {
             try
