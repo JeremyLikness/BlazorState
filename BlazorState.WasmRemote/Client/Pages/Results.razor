@@ -1,0 +1,17 @@
+﻿@page "/results"
+@using BlazorState.Shared;
+@inject StateService Service
+
+<h1>Blazor Health App: Results</h1>
+
+Your results:
+
+<br style="clear: both" />
+
+<HealthOutputs />
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await Service.InitAsync();       
+    }
+}
