@@ -2,8 +2,8 @@
 
 Examples of how to manage state in Blazor WebAssembly and Blazor Server apps.
 
-[![Free Azure](https://camo.githubusercontent.com/943435dedf206fce581c5363ba8946078394e2c8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f465245452d417a7572652d303037376666)](https://azure.microsoft.com/en-us/free/?WT.mc_id=blazorstate-github-jeliknes)
-Get your [free Azure account](https://azure.microsoft.com/en-us/free/?WT.mc_id=blazorstate-github-jeliknes)
+[![Free Azure](https://camo.githubusercontent.com/943435dedf206fce581c5363ba8946078394e2c8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f465245452d417a7572652d303037376666)](https://azure.microsoft.com/free/?WT.mc_id=blazorstate-github-jeliknes)
+Get your [free Azure account](https://azure.microsoft.com/free/?WT.mc_id=blazorstate-github-jeliknes)
 
 This project is intended to illustrate how to better manage state in Blazor applications. It is based on the official documentation: [ASP.NET Core Blazor state management](https://docs.microsoft.com/aspnet/core/blazor/state-management?view=aspnetcore-3.1&WT.mc_id=blazorstate-github-jeliknes).
 
