@@ -20,7 +20,7 @@ namespace BlazorState.Shared
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            StateHasChanged();
+            InvokeAsync(()=>StateHasChanged());
         }
 
         private bool disposedValue = false; // To detect redundant calls

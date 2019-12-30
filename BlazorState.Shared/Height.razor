@@ -28,8 +28,7 @@
             Model.PropertyChanged += (o, e) =>
             {
                 _height = Model.IsImperial ? (int)Model.HeightInches :
-                    (int)(Model.InchesToCentimeters(Model.HeightInches));
-                base.StateHasChanged();
+                    (int)(Model.InchesToCentimeters(Model.HeightInches));                
             };
         }
         base.OnAfterRender(firstRender);

@@ -20,8 +20,7 @@
             Model.PropertyChanged += (o, e) =>
             {
                 _weight = Model.IsImperial ? (int)Model.WeightPounds :
-                (int)(Model.PoundsToKilograms(Model.WeightPounds));
-                base.StateHasChanged();
+                (int)(Model.PoundsToKilograms(Model.WeightPounds));                
             };
         }
         base.OnAfterRender(firstRender);
