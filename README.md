@@ -11,6 +11,8 @@ To get started, fork the repo (optional) then clone it.
 
 ⬇ Download the related presentation from [here](https://jlikme.blob.core.windows.net/presentations/Likness-Blazor-State.pptx).
 
+👀 Read the related blog post: [Blazor State Management](https://blog.jeremylikness.com/blog/blazor-state-management/).
+
 ## Stating the Problem
 
 The project contains several variations of a Blazor app for tracking health statistics. (For the background behind the sample app, read: [From Angular to Blazor: The Health App](https://blog.jeremylikness.com/blog/2019-01-03_from-angular-to-blazor-the-health-app/)). This version follows a layered architecture:
